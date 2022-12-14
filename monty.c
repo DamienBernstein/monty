@@ -78,7 +78,7 @@ void function_runner(char *str, stack_t **stack)
 
 int main(int argc, char *argv[])
    {
-	FILE *fp;
+	FILE *stream;
         char *line = NULL;
         size_t len = 0;
         ssize_t nread;
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
            exit(EXIT_FAILURE);
        }
 
-       fp = fopen(argv[1], "r");
+       stream = fopen(argv[1], "r");
        if (stream == NULL) {
            perror("fopen");
            exit(EXIT_FAILURE);
