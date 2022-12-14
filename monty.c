@@ -104,14 +104,14 @@ int main(int argc, char *argv[])
            printf("Retrieved line of length %zu:\n", nread);
            fwrite(line, nread, 1, stdout);
        }
-
-       free(line);
-       fclose(fp);
-       exit(EXIT_SUCCESS);
 	
        printf("%s\n", buffer);
        strcpy(tmp, buffer);
        printf("%s\n", tmp);
        function_runner(tmp, stack);
+	
+	free(line);
+       fclose(stream);
+       exit(EXIT_SUCCESS);
 
    }
