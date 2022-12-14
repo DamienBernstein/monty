@@ -27,7 +27,7 @@ void push(stack_t **stack, unsigned int line_number)
 		*stack = new_node;
 	}
 }
-
+}
 	if (check_mode(*stack) == STACK) /* STACK mode insert at front */
 	{
 		tmp = (*stack)->next;
