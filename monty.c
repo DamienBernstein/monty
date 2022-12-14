@@ -3,6 +3,11 @@
 #include <string.h>
 #include <stdlib.h>
 
+/**
+ * free-stack - frees the stack
+ * @head: head of stack
+ * Return: nothing
+ */
 void free_stack(stack_t *head)
 {
 	if (head == NULL)
@@ -12,7 +17,11 @@ void free_stack(stack_t *head)
 	free_stack(head->next);
 	free(head);
 }
-
+/**
+ * numbers_only - converts a str to a number
+ * @str: string
+ * Return: a number
+ */
 
 int numbers_only(char *str)
 {
@@ -30,6 +39,12 @@ int numbers_only(char *str)
 	return (j);
 }
 
+/**
+ * pint- prints the value at the top of
+ * the stack, followed by a new line.
+ * @line_number: one greater than the number
+ * @stack: data structure
+ */
 void pint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
@@ -49,6 +64,11 @@ void pint(stack_t **stack, unsigned int line_number)
 	}
 }
 
+/**
+ * push - pushes an element to the stack.
+ * @line_number: one greater than the number
+ * @stack: data structure
+ */
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node, *tmp;
@@ -74,7 +94,11 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 }
 
-
+/**
+ * pall - prints all the values on the stack
+ * @line_number: one greater than the number
+ * @stack: data structure
+ */
 void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
@@ -88,6 +112,12 @@ void pall(stack_t **stack, unsigned int line_number)
 		tmp = tmp->next;
 	}
 }
+
+/**
+ * pop - deletes a node
+ * @line_number: one greater than the number
+ * @stack: data structure
+ */
 
 void pop(stack_t **stack, unsigned int line_number)
 {
@@ -119,6 +149,11 @@ void pop(stack_t **stack, unsigned int line_number)
 	
 }
 
+/**
+ * swap - swaps an element
+ * @line_number: one greater than the number
+ * @stack: data structure
+ */
 void swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp, *tmp2;
@@ -142,6 +177,11 @@ void swap(stack_t **stack, unsigned int line_number)
 	}
 }
 
+/**
+ * add - adds an element to the stack
+ * @line_number: one greater than the number
+ * @stack: data structure
+ */
 void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp, *tmp2;
@@ -166,6 +206,13 @@ void add(stack_t **stack, unsigned int line_number)
 	}
 }
 
+/**
+ * function_selector - selects a function
+ * @str: string 
+ * @stack: data structure
+ * @line_number: one greater than the number
+ * of new-line characters read
+ */
 
 void function_selector(char *str, stack_t **stack, unsigned int line_number)
 {
@@ -231,7 +278,12 @@ void function_selector(char *str, stack_t **stack, unsigned int line_number)
 }
 
 
-
+/**
+ * main - entry point
+ * @argc: counts the number of arguements
+ * @argv: list of all arguements
+ * Return: 0 if success and 1 if failure
+ */
 int main(int argc, char *argv[])
 {
 	FILE *fp;
