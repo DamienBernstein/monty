@@ -27,7 +27,6 @@ void push(stack_t **stack, unsigned int line_number)
 		*stack = new_node;
 	}
 }
-	new_node->n = atoi(op_toks[1]);
 
 	if (check_mode(*stack) == STACK) /* STACK mode insert at front */
 	{
