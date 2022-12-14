@@ -5,28 +5,56 @@
 
 char buffer[1024];
 
-void push(stack_t **stack, unsigned int line_number)
+void monty_push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new_node, *tmp;
-	
-	tmp = *stack;
-	
-	if (tmp == NULL)
+	stack_t *tmp, *new;
+	int i;
+
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
 	{
-		new_node = malloc(sizeof(stack_t));
-		new_node->next = NULL;
-		new_node->prev = NULL;
-		*stack = new_node;
+		set_op_tok_error(malloc_error());
+		return;
 	}
-	else
+
+	if (op_toks[1] == NULL)
 	{
-		new_node = malloc(sizeof(stack_t));
-		new_node->next = *stack;
-		new_node->prev = NULL;
-		tmp->prev = new_node;
-		*stack = new_node;
+		set_op_tok_error(no_int_error(line_number));
+		return;
+	}
+
+	for (i = 0; op_toks[1][i]; i++)
+	{
+		if (op_toks[1][i] == '-' && i == 0)
+			continue;
+		if (op_toks[1][i] < '0' || op_toks[1][i] > '9')
+		{
+			set_op_tok_error(no_int_error(line_number));
+			return;
+		}
+	}
+	new->n = atoi(op_toks[1]);
+
+	if (check_mode(*stack) == STACK) /* STACK mode insert at front */
+	{
+		tmp = (*stack)->next;
+		new->prev = *stack;
+		new->next = tmp;
+		if (tmp)
+			tmp->prev = new;
+		(*stack)->next = new;
+	}
+	else /* QUEUE mode insert at end */
+	{
+		tmp = *stack;
+		while (tmp->next)
+			tmp = tmp->next;
+		new->prev = tmp;
+		new->next = NULL;
+		tmp->next = new;
 	}
 }
+
 
 void pall(stack_t **stack, unsigned int line_number)
 {
