@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
            exit(EXIT_FAILURE);
        }
 
-       stream = fopen(argv[1], "r");
+       strcat = fopen(argv[1], "r");
        if (stream == NULL) {
            perror("fopen");
            exit(EXIT_FAILURE);
