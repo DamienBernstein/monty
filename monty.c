@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
            exit(EXIT_FAILURE);
        }
 
-       strcat = fopen(argv[1], "r");
+       fp = fopen(argv[1], "r");
        if (stream == NULL) {
            perror("fopen");
            exit(EXIT_FAILURE);
@@ -108,4 +108,10 @@ int main(int argc, char *argv[])
        free(line);
        fclose(fp);
        exit(EXIT_SUCCESS);
+	
+       printf("%s\n", buffer);
+       strcpy(tmp, buffer);
+       printf("%s\n", tmp);
+       function_runner(tmp, stack);
+
    }
