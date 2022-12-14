@@ -26,26 +26,6 @@ void push(stack_t **stack, unsigned int line_number)
 		tmp->prev = new_node;
 		*stack = new_node;
 	}
-
-	if (check_mode(*stack) == STACK) /* STACK mode insert at front */
-	{
-		tmp = (*stack)->next;
-		new_node->prev = *stack;
-		new_node->next = tmp;
-		if (tmp)
-			tmp->prev = new_node;
-		(*stack)->next = new_node;
-	}
-	else /* QUEUE mode insert at end */
-	{
-		tmp = *stack;
-		while (tmp->next)
-			tmp = tmp->next;
-		new_node->prev = tmp;
-		new_node->next = NULL;
-		tmp->next = new_node;
-	}
-}
 }
 
 
