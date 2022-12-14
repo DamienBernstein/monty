@@ -239,27 +239,22 @@ int main(int argc, char *argv[])
 	unsigned int line_number, i;
 	stack_t **stack;
 	char buffer[1024];
-	
 	tmp = NULL;
 	memset(buffer, 0, sizeof(buffer));
-
 	stack = malloc(sizeof(stack_t));
 	*stack = NULL;
 	line_number = 1;
-	
 	if (argc < 2 || argc > 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	
 	while(fgets(buffer,sizeof(buffer),fp)!= NULL)
 	{
 		i = 0;
@@ -278,16 +273,8 @@ int main(int argc, char *argv[])
       		++line_number;
 		memset(buffer, 0, sizeof(buffer));
     	}
-
-	
-
-
-
-
-
 	fclose(fp);
 	free_stack(*stack);
 	free(stack);
 	return (0);
-
 }
