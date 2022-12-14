@@ -28,7 +28,6 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 }
 
-
 void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
@@ -54,6 +53,20 @@ void function_selector(char *str, stack_t **stack, unsigned int line_number)
 		{NULL, NULL}
 	};
 	
+	token = strtok(str, " ");
+	i = 0;
+	while (functions[i].opcode != NULL)
+	{
+		if (strcmp(functions[i].opcode, token) == 0)
+		{
+			printf("this works opcode:%s \n", token);
+			
+			break;
+		}
+		++i;
+	}
+	
+	
 }
 
 void function_runner(char *str, stack_t **stack)
@@ -77,41 +90,39 @@ void function_runner(char *str, stack_t **stack)
 }
 
 int main(int argc, char *argv[])
-   {
-	FILE *stream;
-        char *line = NULL;
-        size_t len = 0;
-        ssize_t nread;
+{
+	FILE *fp;
 	char *token, tmp[1024];
 	unsigned int line_number;
 	stack_t **stack;
 	
 	*stack = NULL;
 	line_number = 1;
-
-       if (argc != 2) {
-           fprintf(stderr, "Usage: %s <file>\n", argv[0]);
-           exit(EXIT_FAILURE);
-       }
-
-       stream = fopen(argv[1], "r");
-       if (stream == NULL) {
-           perror("fopen");
-           exit(EXIT_FAILURE);
-       }
-
-       while ((nread = getline(&line, &len, stream)) != -1) {
-           printf("Retrieved line of length %zu:\n", nread);
-           fwrite(line, nread, 1, stdout);
-       }
 	
-       printf("%s\n", buffer);
-       strcpy(tmp, buffer);
-       printf("%s\n", tmp);
-       function_runner(tmp, stack);
+	if (argc < 2 || argc > 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 	
-	free(line);
-       fclose(stream);
-       exit(EXIT_SUCCESS);
+	fp = fopen(argv[1], "r");
+	if (fp == NULL)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
+	memset(buffer, 0, sizeof(buffer));
+	fread(buffer, sizeof(buffer), 1, fp);
+	
 
-   }
+	printf("%s\n", buffer);
+	strcpy(tmp, buffer);
+	printf("%s\n", tmp);
+	function_runner(tmp, stack);
+
+
+
+
+	fclose(fp);
+
+}
